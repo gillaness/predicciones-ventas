@@ -19,11 +19,19 @@ Para ello contamos con los siguientes datos:
 |Outlet_Type|Si el punto de venta es una tienda de comestibles o algún tipo de supermercado|
 |Item_Outlet_Sales|Ventas del producto en la tienda en particular. Ésta es la variable objetivo a predecir.|
 
-Al comenzar con el análisis del set de datos, en primera lugar se identificaron si existian datos faltantes.
-Se descubre la presencia de datos nulos en el peso de alguno de los productos, y en el tamaño de algunas tiendas.
+Se comienza con un análisis del dataset para tratar los valores nulos presentes.
 
-En el caso de los pesos faltantes, como contamos con el ID de los productos, simplemente se buscó el valor del peso de producto en aquellos registros del producto donde si estaba indicado el peso (como es el mismo producto, se ocupa el mismo peso para cada ID correspondiente)
+Una vez concluida esto, se procede con un análisis exploratorio, donde se puede identificar cual es la tienda que más vende, que tipo de productos son los que más se han vendido en general en todas las tiendas, la distribución de alguna de las variables y la presencia de outliers, además de ver la matríz de correlación para ver que tan lineal es la relación entre las variables con la variable objetivo **Item_Outlet_Sales**
 
-A pesar de esto, quedaron cuatro (4) productos que no se pudo obtener el peso de esta forma, ya que fueron vendidos solamente en una tienda.
-Estos productos fueron descartados del set de datos (aunque no es la opción más recomendable), ya que no teniamos alguna otra referencia para calcular este peso sin la asesoria de un experto en estos productos y además representaban un porcentaje muy ínfimo en las ventas totales de las tiendas (quizás eran productos fuera de producción en la actualidad o solo se vendieron una sola temporada)
+Finalmente, se procede a aplicar LabelEncoder para trabajar las características de tipo categóricas como tipo numéricas y luego se escalan los datos, mediante StandardScaler y dividimos el set de datos en Entrenamiento y Testeo.
 
+Se prueban 3 tipos de modelos de regresión:
+
+- Regresión Lineal.
+- KNN Regresor
+- Random Forest Regresor
+
+Para estos tres modelos, obtenemos los puntajes R2 y la raíz del error cuadrático medio.
+En base a estos puntajes, se opta por aquel modelo que presenta el R2 mayor y el menor error, que en este caso fue Random Forest Regressor.
+
+Como conclusión, creo que se puede mejorar el modelo, realizando un análisis junto a alguien entendido en este tipo de industria, para revisar si todas las características del dataset son necesarias, ya que quizas reduciendo algunas se pueda mejorar alguno de los modelos presentados
